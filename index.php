@@ -20,5 +20,5 @@ match ($act) {
     
 };
 
-hihi địt mẹ mày
+hihi 
 
