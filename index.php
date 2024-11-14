@@ -17,6 +17,6 @@ $act = $_GET['act'] ?? '/';
 
 match ($act) {
     // Trang chủ
-   // THU
+// muon them code 
     
 };
