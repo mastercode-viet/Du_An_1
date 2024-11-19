@@ -17,6 +17,10 @@ $act = $_GET['act'] ?? '/';
 
 match ($act) {
     // Trang chủ
-// muon them code 
+     => (new HomeController())->index(),
+};
+
+
+
     
 };
