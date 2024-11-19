@@ -17,8 +17,7 @@ $act = $_GET['act'] ?? '/';
 
 match ($act) {
     // Trang chủ
-    
+    '/'                 => (new HomeController())->index(),
 };
 
-hihi 
 
