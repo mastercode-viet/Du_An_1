@@ -48,6 +48,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit') {
     }
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -63,49 +65,59 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit') {
         }
     </style>
 </head>
+
 <body>
     <h1>Danh sách phim</h1>
     <a href="?view=quanlyphim&action=create" class="btn btn-primary">Thêm phim</a>
     <table class="table table-bordered">
-        <tr>
-            <th>ID</th>
-            <th>Tên</th>
-            <th>Ngày ra mắt</th>
-            <th>Ngày chiếu</th>
-            <th>Thời lượng</th>
-            <th>Nội dung</th>
-            <th>Giới thiệu</th>
-            <th>Đạo diễn</th>
-            <th>Thể loại</th>
-            <th>Status</th>
-            <th>Hành động</th>
-        </tr>
-        <?php if (!empty($phim)): ?>
-            <?php foreach ($phim as $p): ?>
-            <tr>
-            <td><?= htmlspecialchars($p['id'] ?? '') ?></td>
-            <td><?= htmlspecialchars($p['ten'] ?? '') ?></td>
-            <td><?= htmlspecialchars($p['ngayramat'] ?? '') ?></td>
-            <td><?= htmlspecialchars($p['ngaychieu'] ?? '') ?></td>
-            <td><?= htmlspecialchars($p['thoiluong'] ?? '') ?></td>
-            <td><?= htmlspecialchars($p['noidung'] ?? '') ?></td>
-            <td><?= htmlspecialchars($p['gioithieu'] ?? '') ?></td>
-            <td><?= htmlspecialchars($p['daodien'] ?? '') ?></td>
-            <td><?= htmlspecialchars($p['theloai'] ?? '') ?></td>
-            <td><?= htmlspecialchars($p['status'] ?? '') ?></td>
-            <td>
-                <a href="?view=quanlyphim&action=edit&id=<?= urlencode($p['id']) ?>" 
-                class="btn btn-warning btn-sm">Chỉnh sửa</a>
-                <a href="?view=quanlyphim&action=delete&id=<?= htmlspecialchars($p['id']) ?>" 
-                   onclick="return confirm('Bạn có chắc muốn xóa?');">Xóa</a>
-            </td>
-            </tr>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <tr>
-                <td colspan="11">Không có dữ liệu phim nào để hiển thị.</td>
-            </tr>
-        <?php endif; ?>
+    <tr>
+    <th>ID</th>
+    <th>Tên</th>
+    <th>Ảnh</th>
+    <th>Ngày ra mắt</th>
+    <th>Ngày chiếu</th>
+    <th>Thời lượng</th>
+    <th>Nội dung</th>
+    <th>Giới thiệu</th>
+    <th>Đạo diễn</th>
+    <th>Thể loại</th>
+    <th>Status</th>
+    <th>Hành động</th>
+</tr>
+<?php if (!empty($phim)): ?>
+    <?php foreach ($phim as $p): ?>
+    <tr>
+        <td><?= htmlspecialchars($p['id'] ?? '') ?></td>
+        <td><?= htmlspecialchars($p['ten'] ?? '') ?></td>
+        <td>
+            <?php if (!empty($p['image'])): ?>
+                <img src="<?= htmlspecialchars($p['image']) ?>" width="100px" height="100px">
+            <?php else: ?>
+                <span>Không có ảnh</span>
+            <?php endif; ?>
+        </td>
+        <td><?= htmlspecialchars($p['ngayramat'] ?? '') ?></td>
+        <td><?= htmlspecialchars($p['ngaychieu'] ?? '') ?></td>
+        <td><?= htmlspecialchars($p['thoiluong'] ?? '') ?></td>
+        <td><?= htmlspecialchars($p['noidung'] ?? '') ?></td>
+        <td><?= htmlspecialchars($p['gioithieu'] ?? '') ?></td>
+        <td><?= htmlspecialchars($p['daodien'] ?? '') ?></td>
+        <td><?= htmlspecialchars($p['theloai'] ?? '') ?></td>
+        <td><?= htmlspecialchars($p['status'] ?? '') ?></td>
+        <td>
+            <a href="?view=quanlyphim&action=edit&id=<?= urlencode($p['id']) ?>" 
+            class="btn btn-warning btn-sm">Chỉnh sửa</a>
+            <a href="?view=quanlyphim&action=delete&id=<?= htmlspecialchars($p['id']) ?>" 
+               onclick="return confirm('Bạn có chắc muốn xóa?');">Xóa</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+<?php else: ?>
+    <tr>
+        <td colspan="11">Không có dữ liệu phim nào để hiển thị.</td>
+    </tr>
+<?php endif; ?>
+
     </table>
 
     <!-- Thêm thư viện SweetAlert2 -->

@@ -12,19 +12,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $name = trim($_POST["ten"]);
     }
 
-    // Validate status
     if (empty(trim($_POST["status"]))) {
         $status_err = "Vui lòng nhập trạng thái.";
     } else {
         $status = trim($_POST["status"]);
     }
 
-    // Check for errors before inserting into database
     if (empty($name_err) && empty($status_err)) {
         // Prepare SQL statement
-        $sql = "INSERT INTO rap (ten, status) VALUES (:ten, :status)";
+        $sql = "INSERT INTO rap (ten, status) VALUES (:ten,dia chi, soluong)";
         if ($stmt = $conn->prepare($sql)) {
-            // Bind parameters
             $stmt->bindParam(":ten", $name, PDO::PARAM_STR);
             $stmt->bindParam(":status", $status, PDO::PARAM_STR);
 

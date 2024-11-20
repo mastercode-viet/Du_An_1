@@ -42,7 +42,7 @@
                         <a href="#">Trang chủ</a>
                     </li>
                     <li>
-                        <a href="lichchieu.html">Lịch chiếu</a>
+                        <a href="lichchieu.php">Lịch chiếu</a>
                     </li>
                     <li>
                         <a href="#">Tin tức</a>

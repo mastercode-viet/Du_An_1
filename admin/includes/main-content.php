@@ -1,7 +1,7 @@
 <div class="main-content">
     <?php
     // Kiểm tra nếu tham số 'view' có tồn tại
-    if (isset($_GET['view'])) {
+    if (isset($_GET['view']) && !isset($_GET['action'])) {
         $view = $_GET['view'];
         $viewPath = 'admin/views/' . $view . '/index.php'; // Chèn trang index của chức năng
 
@@ -11,7 +11,9 @@
         } else {
             echo "Trang không tồn tại!";
         }
-
+    } else if (isset($_GET['view']) && isset($_GET['action'])) {
+        $view = $_GET['view'];
+        $viewPath = 'admin/views/' . $view . '/index.php'; // Chèn trang index của chức năng
         // Kiểm tra action (create, update) để chèn trang create hoặc update
         if (isset($_GET['action'])) {
             $action = $_GET['action'];
@@ -24,7 +26,6 @@
                 echo "Trang action không tồn tại!";
             }
         }
-
     } else {
         echo "<p>Chọn chức năng từ menu bên trái.</p>";
     }

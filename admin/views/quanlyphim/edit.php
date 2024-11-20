@@ -158,6 +158,12 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                     <option value="2" <?= $phim['status'] == 2 ? 'selected' : '' ?>>Ngừng chiếu</option>
                 </select>
             </div>
+            <!--  -->
+            <div class="form-group">
+                <label for="image">Chọn ảnh mới</label>
+                <input type="file" name="image" class="form-control" accept="image/">
+            </div>
+            <!--  -->
             <div class="form-group">
                 <label for="theloai">Chọn Thể Loại</label><br>
                 <select class="form-control" id="theloai" name="theloai[]" multiple size="10" required>

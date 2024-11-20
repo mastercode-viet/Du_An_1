@@ -7,11 +7,11 @@ $stmt = $conn->prepare($sql);    // Chuẩn bị câu lệnh SQL
 
 try {
     // Thực thi câu lệnh
-    $stmt->execute(); 
+    $stmt->execute();
 
     // Lấy dữ liệu từ cơ sở dữ liệu
     $theloai = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
+
     if (empty($theloai)) {
         echo "Không có dữ liệu thể loại nào.";
     }
@@ -22,6 +22,7 @@ try {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,27 +35,30 @@ try {
         }
     </style>
 </head>
+
 <body>
     <h1>Danh sách thể loại phim</h1>
-    <a href="create.php">Thêm thể loại mới</a>
+    <a href="?view=quanlitheloai&action=create" class="btn btn-primary">Thêm thể loại</a>
     <table class="table table-bordered">
         <tr>
             <th>ID</th>
             <th>Tên</th>
             <th>Status</th>
+            <!-- <th>ảnh</th> -->
             <th>Sửa và Xóa</th>
         </tr>
         <?php if (!empty($theloai) && is_array($theloai)): ?>
             <?php foreach ($theloai as $theloais): ?>
-            <tr>
-                <td><?= htmlspecialchars($theloais['id_theloai']) ?></td>
-                <td><?= htmlspecialchars($theloais['ten']) ?></td>
-                <td><?= htmlspecialchars($theloais['status']) ?></td>
-                <td>
-                    <a href="edit.php?id=<?= htmlspecialchars($theloais['id_theloai']) ?>">Chỉnh sửa</a>
-                    <a href="delete.php?id=<?= htmlspecialchars($theloais['id_theloai']) ?>" onclick="return confirm('Bạn có chắc muốn xóa?');">Xóa</a>
-                </td>
-            </tr>
+                <tr>
+                    <td><?= htmlspecialchars($theloais['id_theloai']) ?></td>
+                    <td><?= htmlspecialchars($theloais['ten']) ?></td>
+                    <td><?= htmlspecialchars($theloais['status']) ?></td>
+
+                    <td>
+                        <a href="edit.php?id=<?= htmlspecialchars($theloais['id_theloai']) ?>">Chỉnh sửa</a>
+                        <a href="delete.php?id=<?= htmlspecialchars($theloais['id_theloai']) ?>" onclick="return confirm('Bạn có chắc muốn xóa?');">Xóa</a>
+                    </td>
+                </tr>
             <?php endforeach; ?>
         <?php else: ?>
             <tr>
@@ -63,4 +67,5 @@ try {
         <?php endif; ?>
     </table>
 </body>
+
 </html>

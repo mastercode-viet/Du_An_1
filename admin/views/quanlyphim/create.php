@@ -1,7 +1,7 @@
 <?php
 include 'db.php';
 
-// Lấy tất cả thể loại từ cơ sở dữ liệu để người dùng có thể chọn
+// Lấy tất cả thể loại từ cơ sở dữ liệu
 $sql = "SELECT * FROM the_loai";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
@@ -19,10 +19,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $status = $_POST['status'];
     $theLoaiIds = $_POST['theloai'];  // Mảng các ID thể loại đã chọn
 
+    $imagePath = null;
+// 
+if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+    // Thư mục lưu trữ ảnh
+    $uploadDir = '/admin/images/'; // Thư mục chứa ảnh
+
+    $tmpName = $_FILES['image']['tmp_name']; // temp - địa chỉ tạm thời file upload đc lưu
+    $fileName = basename($_FILES['image']['name']);
+    $targetFilePath = $uploadDir . $fileName; // luu duong dan upload
+
+    $rootPath = $_SERVER['DOCUMENT_ROOT']; // C:/laragon/www/duanthaolam
+    $target_path = $rootPath . $uploadDir . basename( $_FILES["image"]["name"]);
+
+    // Di chuyển file vào thư mục chỉ định
+    if (move_uploaded_file($tmpName, $target_path)) {
+        $imagePath = $targetFilePath; // Đường dẫn ảnh
+    } else {
+        echo "Lỗi: Không thể tải ảnh lên.";
+        exit;
+    }
+} else {
+    echo "Lỗi: Không có ảnh để tải lên.";
+    exit;
+}
+//
     try {
         // Thêm phim vào bảng 'phim'
-        $sqlPhim = "INSERT INTO phim (ten, ngayramat, ngaychieu, thoiluong, noidung, gioithieu, daodien, status) 
-                    VALUES (:ten, :ngayramat, :ngaychieu, :thoiluong, :noidung, :gioithieu, :daodien, :status)";
+        $sqlPhim = "INSERT INTO phim (ten, ngayramat, ngaychieu, thoiluong, noidung, gioithieu, daodien, status, image) 
+                    VALUES (:ten, :ngayramat, :ngaychieu, :thoiluong, :noidung, :gioithieu, :daodien, :status, :image)";
         $stmtPhim = $conn->prepare($sqlPhim);
         $stmtPhim->execute([
             ':ten' => $tenPhim,
@@ -32,7 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ':noidung' => $noiDung,
             ':gioithieu' => $gioiThieu,
             ':daodien' => $daoDien,
-            ':status' => $status
+            ':status' => $status,
+            ':image' => $imagePath,
         ]);
         
         // Lấy ID của phim vừa thêm vào
@@ -73,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <div class="container">
         <h1 class="text-center my-4">Thêm Phim Mới</h1>
-        <form action="/admin/views/quanlyphim/create.php" method="POST">
+        <form action="/admin/views/quanlyphim/create.php" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="ten">Tên Phim</label>
                 <input type="text" class="form-control" id="ten" name="ten" required>
@@ -118,6 +144,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </select>
                 <small class="form-text text-muted">Giữ Ctrl (hoặc Command trên Mac) để chọn nhiều thể loại.</small>
             </div>
+
+            <div class="form-group">
+                <label for="image">Chọn ảnh</label>
+                <input type="file" id="image" name="image" class="form-control" accept="image/" required>
+            </div>
+
             <button type="submit" class="btn btn-primary">Thêm Phim</button>
         </form>
     </div>

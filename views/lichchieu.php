@@ -13,15 +13,15 @@
         <div id="header">
             <div class="top-header">
                 <ul>
-                    <li><a href="trangchu.html">Trang chủ</a></li>
+                    <li><a href="trangchu.php">Trang chủ</a></li>
                     <li><a href="#">Lịch chiếu</a></li>
                     <li><a href="#">Tin tức</a></li>
                     <li><a href="#">Khuyến mại</a></li>
                     <li><a href="#">Giá vé</a></li>
                     <li><a href="#">Liên hoan phim</a></li>
                     <li><a href="#">Giới thiệu</a></li>
-                    <li><a href="Sign up.html">Đăng ký</a></li>
-                    <li><a href="login.html">Đăng nhập</a></li>
+                    <li><a href="Sign up.php">Đăng ký</a></li>
+                    <li><a href="login.php">Đăng nhập</a></li>
                 </ul>
             </div>
         </div>
@@ -33,7 +33,9 @@
             <div class="movie-schedule">
                 <div class="movie"><img src="ảnh/ảnh 1.webp">
                     <div class="info">
-                        <h2>NGÀY XƯA CÓ 1 CHUYỆN TÌNH </h2>
+                        <h2>
+                            <a href="movies.html">NGÀY XƯA CÓ 1 CHUYỆN TÌNH</a>
+                        </h2>
                         <p>Xuất xứ - Việt Nam <br>Khởi chiếu ngày: 18/11/2024 <br>Phim được phổ biển đến khán giả từ 13 tuổi trở lên</p>
                         <p>Lịch chiếu </p>
                         <div class="showtimes"><button>10:00 AM</button><button>13:30 PM</button></div>
