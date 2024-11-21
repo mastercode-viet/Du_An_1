@@ -91,7 +91,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit') {
         <td><?= htmlspecialchars($p['ten'] ?? '') ?></td>
         <td>
             <?php if (!empty($p['image'])): ?>
-                <img src="<?= htmlspecialchars($p['image']) ?>" width="100px" height="100px">
+                <img src="<?= htmlspecialchars($p['image']) ?>" width="100px" height="180px">
             <?php else: ?>
                 <span>Không có ảnh</span>
             <?php endif; ?>

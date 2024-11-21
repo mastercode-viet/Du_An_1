@@ -161,7 +161,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             <!--  -->
             <div class="form-group">
                 <label for="image">Chọn ảnh mới</label>
-                <input type="file" name="image" class="form-control" accept="image/">
+                <input type="file" id="image" name="image" class="form-control" accept="image/">
             </div>
             <!--  -->
             <div class="form-group">

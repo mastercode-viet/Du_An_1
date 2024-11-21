@@ -80,16 +80,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chỉnh sửa rap</title>
+    <title>Chỉnh sửa ghế</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 <body>
     <div class="container mt-5">
-        <h2>Chỉnh sửa rap</h2>
-        <p>Chỉnh sửa thông tin rap.</p>
+        <h2>Chỉnh sửa ghế</h2>
+        <p>Chỉnh sửa thông tin ghế.</p>
         <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]) . "?id=" . htmlspecialchars($id); ?>" method="post">
             <div class="form-group">
-                <label>Tên rap</label>
+                <label>Tên ghế</label>
                 <input type="text" name="ten" class="form-control <?= !empty($name_err) ? 'is-invalid' : ''; ?>" value="<?= htmlspecialchars($name); ?>">
                 <span class="invalid-feedback"><?= $name_err; ?></span>
             </div>
