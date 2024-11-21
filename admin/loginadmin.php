@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -137,19 +138,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     </style>
 </head>
+
 <body>
 
-<div class="login-container">
-    <h2>Đăng nhập quản trị viên</h2>
+    <div class="login-container">
+        <h2>Đăng nhập quản trị viên</h2>
 
-    <?php if (isset($error)) { echo "<div class='error'>$error</div>"; } ?>
+        <?php if (isset($error)) {
+            echo "<div class='error'>$error</div>";
+        } ?>
 
-    <form action="loginadmin.php" method="POST">
-        <input type="text" name="username" placeholder="Tên đăng nhập" required>
-        <input type="password" name="password" placeholder="Mật khẩu" required>
-        <button type="submit">Đăng nhập</button>
-    </form>
-</div>
+        <form action="loginadmin.php" method="POST">
+            <input type="text" name="username" placeholder="Tên đăng nhập" required>
+            <input type="password" name="password" placeholder="Mật khẩu" required>
+            <button type="submit">Đăng nhập</button>
+        </form>
+    </div>
 
 </body>
+
 </html>

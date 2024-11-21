@@ -1,6 +1,6 @@
 <?php
 session_start();  // Bắt đầu session để kiểm tra đăng nhập
-
+define('SITE_URL','http://localhost:3000');
 // Kiểm tra nếu chưa đăng nhập thì chuyển đến trang login
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     header("Location: /admin/loginadmin.php");  // Điều hướng tới trang đăng nhập nếu chưa đăng nhập

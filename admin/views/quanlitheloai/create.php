@@ -1,7 +1,5 @@
 <?php
-include 'db.php'; // Include database connection
-
-// Initialize variables for form fields
+include 'db.php';
 $name = $status = "";
 $name_err = $status_err = "";
 
@@ -51,12 +49,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thêm Thể Loại Mới</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
+
 <body>
     <div class="container mt-4">
         <h2>Thêm Thể Loại Mới</h2>
@@ -74,9 +74,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Lưu">
-                <a href="index.php" class="btn btn-secondary ml-2">Hủy</a>
+                <!-- <a href="" class="btn btn-secondary ml-2">Hủy</a> -->
             </div>
         </form>
     </div>
 </body>
+
 </html>

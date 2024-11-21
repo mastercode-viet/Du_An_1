@@ -1,8 +1,8 @@
 <?php
 // Bắt đầu output buffering để ngăn chặn việc gửi output trước khi thay đổi header
 ob_start();
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
 
 
 // Kết nối cơ sở dữ liệu
@@ -36,7 +36,8 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
         ob_clean(); 
         // Chuyển hướng về trang quản lý phim
-        header("Location: /admin/index.php?view=quanlyphim"); 
+        // header("Location: /admin/index.php?view=quanlyphim"); 
+        echo "<script>window.location.href='".SITE_URL."/admin/index.php?view=quanlyphim'</script>";
         exit();  // Dừng thực thi sau khi chuyển hướng
 
     } catch (PDOException $e) {
@@ -47,7 +48,9 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $_SESSION['error'] = 'Lỗi khi xóa phim: ' . $e->getMessage();
 
         // Chuyển hướng về trang quản lý phim
-        header("Location: /admin/index.php?view=quanlyphim"); // Điều hướng về trang quản lý phim
+        // header("Location: /admin/index.php?view=quanlyphim"); // Điều hướng về trang quản lý phim
+         echo "<script>window.location.href='".SITE_URL."/admin/index.php?view=quanlyphim'</script>";
+        // echo 'Xóa thành công. bấm vào <a href="">đây để tiếp tục</a>'
         exit();  // Dừng thực thi sau khi chuyển hướng
     }
 } else {
@@ -55,7 +58,9 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $_SESSION['error'] = 'ID phim không hợp lệ.';
 
     // Chuyển hướng về trang quản lý phim
-    header("Location: /admin/index.php?view=quanlyphim"); // Điều hướng về trang quản lý phim
+    // header("Location: /admin/index.php?view=quanlyphim"); // Điều hướng về trang quản lý phim
+    echo "<script>window.location.href='".SITE_URL."/admin/index.php?view=quanlyphim'</script>";
+
     exit();  // Dừng thực thi sau khi chuyển hướng
 }
 

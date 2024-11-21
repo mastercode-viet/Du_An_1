@@ -11,6 +11,16 @@
 
 <body>
     <script>
+        // Lấy tất cả các phần tử button với class là 'myButton'
+        const buttons = document.querySelectorAll('.myButton');
+
+        // Lặp qua tất cả các button và thêm sự kiện click
+        buttons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                // Toggle class btn-selected khi nhấn vào button
+                button.classList.toggle('btn-selected');
+            });
+        });
     </script>
     <style>
         .step {
@@ -125,13 +135,25 @@
             border-radius: 8px;
             margin: 1px 19px 0px -14px;
         }
+        
+        .btn-selected {
+            background-color: #4caf50;
+            /* Màu xanh lá khi chọn */
+            color: white;
+        }
+        
+        .booked {
+            background-color: gray;
+            /* Màu xám cho ghế đã đặt */
+            cursor: not-allowed;
+        }
     </style>
     <div id="main">
         <div id="header">
             <div class="top-header">
                 <ul>
                     <li>
-                        <a href="#">Trang chủ</a>
+                        <a href="trangchu.html">Trang chủ</a>
                     </li>
                     <li>
                         <a href="lichchieu.html">Lịch chiếu</a>
