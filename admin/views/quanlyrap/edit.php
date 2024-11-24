@@ -1,116 +1,65 @@
-<?php
-include 'db.php'; // Include database connection
-
-// Initialize variables for form fields
-$name = $status = "";
-$name_err = $status_err = "";
-
-// Check if 'id' is present in URL and get the record data
-if (isset($_GET['id']) && !empty(trim($_GET['id']))) {
-    $id = trim($_GET['id']);
-
-    // Fetch existing data
-    $sql = "SELECT * FROM the_loai WHERE id_theloai = :id";
-    if ($stmt = $conn->prepare($sql)) {
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($row) {
-            $name = $row['ten'];
-            $status = $row['status'];
-        } else {
-            // Redirect if no matching record found
-            header("Location: index.php");
-            exit();
-        }
-
-        // Close statement
-        unset($stmt);
-    }
-}
-
-// Process form submission for updating the record
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Validate name
-    if (empty(trim($_POST["ten"]))) {
-        $name_err = "Vui lòng nhập tên thể loại.";
-    } else {
-        $name = trim($_POST["ten"]);
-    }
-
-    // Validate status
-    if (empty(trim($_POST["status"]))) {
-        $status_err = "Vui lòng nhập trạng thái.";
-    } else {
-        $status = trim($_POST["status"]);
-    }
-
-    // Check for errors before updating in the database
-    if (empty($name_err) && empty($status_err)) {
-        // Prepare an update statement
-        $sql = "UPDATE the_loai SET ten = :ten, status = :status WHERE id_theloai = :id";
-        if ($stmt = $conn->prepare($sql)) {
-            // Bind parameters
-            $stmt->bindParam(":ten", $name, PDO::PARAM_STR);
-            $stmt->bindParam(":status", $status, PDO::PARAM_STR);
-            $stmt->bindParam(":id", $id, PDO::PARAM_INT);
-
-            // Attempt to execute the statement
-            if ($stmt->execute()) {
-                // Redirect to the main page after successful update
-                header("Location: index.php");
-                exit();
-            } else {
-                echo "Có lỗi xảy ra khi cập nhật. Vui lòng thử lại.";
-            }
-
-            // Close statement
-            unset($stmt);
-        }
-    }
-
-    // Close connection
-    unset($conn);
-}
-?>
-
+<!-- views/rap/edit.php -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chỉnh sửa rap</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <title>Chỉnh Sửa Rạp</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container mt-5">
-        <h2>Chỉnh sửa rap</h2>
-        <p>Chỉnh sửa thông tin rap.</p>
-        <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]) . "?id=" . htmlspecialchars($id); ?>" method="post">
+    <div class="container">
+        <h1 class="text-center text-danger">Chỉnh Sửa Rạp</h1>
+
+        <!-- Thông báo thành công hoặc lỗi -->
+        <?php if (isset($_SESSION['success'])): ?>
+            <div class="alert alert-success"><?= $_SESSION['success']; ?></div>
+            <?php unset($_SESSION['success']); ?>
+        <?php elseif (isset($_SESSION['error'])): ?>
+            <div class="alert alert-danger"><?= $_SESSION['error']; ?></div>
+            <?php unset($_SESSION['error']); ?>
+        <?php endif; ?>
+
+        <form action="?view=Rap&action=edit&id=<?= $rap['id'] ?>" method="POST">
             <div class="form-group">
-                <label>Tên rap</label>
-                <input type="text" name="ten" class="form-control <?= !empty($name_err) ? 'is-invalid' : ''; ?>" value="<?= htmlspecialchars($name); ?>">
-                <span class="invalid-feedback"><?= $name_err; ?></span>
+                <label for="ten">Tên Rạp</label>
+                <input type="text" name="ten" id="ten" class="form-control" value="<?= htmlspecialchars($rap['ten']) ?>" required>
             </div>
 
             <div class="form-group">
-                <label>Địa chỉ</label>
-                <input type="text" name="diachi" class="form-control <?= !empty($diachi_err) ? 'is-invalid' : ''; ?>" value="<?= htmlspecialchars($diachi); ?>">
-                <span class="invalid-feedback"><?= $diachi_err; ?></span>
+                <label for="diachi">Địa chỉ</label>
+                <input type="text" name="diachi" id="diachi" class="form-control" value="<?= htmlspecialchars($rap['diachi']) ?>" required>
             </div>
 
             <div class="form-group">
-                <label>số lượng</label>
-                <input type="text" name="status" class="form-control <?= !empty($soluong_err) ? 'is-invalid' : ''; ?>" value="<?= htmlspecialchars($soluong); ?>">
-                <span class="invalid-feedback"><?= $soluong_err; ?></span>
+                <label for="thoi_gian_mo">Thời gian mở</label>
+                <input type="time" name="thoi_gian_mo" id="thoi_gian_mo" class="form-control" value="<?= htmlspecialchars($rap['thoi_gian_mo']) ?>" required>
             </div>
 
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Lưu">
-                <a href="index.php" class="btn btn-secondary ml-2">Hủy</a>
+                <label for="thoi_gian_dong">Thời gian đóng</label>
+                <input type="time" name="thoi_gian_dong" id="thoi_gian_dong" class="form-control" value="<?= htmlspecialchars($rap['thoi_gian_dong']) ?>" required>
             </div>
+
+            <div class="form-group">
+                <label for="status">Trạng thái</label>
+                <select name="status" id="status" class="form-control" required>
+                    <option value="1" <?= $rap['status'] == 1 ? 'selected' : '' ?>>Hoạt động</option>
+                    <option value="0" <?= $rap['status'] == 0 ? 'selected' : '' ?>>Dừng hoạt động</option>
+                </select>
+            </div>
+
+        
+
+            <div class="form-group">
+                <label for="dienthoai">Điện thoại</label>
+                <input type="text" name="dienthoai" id="dienthoai" class="form-control" value="<?= htmlspecialchars($rap['dienthoai']) ?>" required>
+            </div>
+
+            <button type="submit" class="btn btn-warning">Cập nhật Rạp</button>
         </form>
+
+        <a href="?view=Rap" class="btn btn-secondary mt-3">Quay lại</a>
     </div>
 </body>
 </html>

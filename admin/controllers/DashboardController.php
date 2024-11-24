@@ -2,6 +2,6 @@
 
 class DashboardController {
     public function index() {
-        require_once "./views/dashboard.php";
+        include($_SERVER['DOCUMENT_ROOT'] . '/admin/views/loginadmin.php');
     }
 }

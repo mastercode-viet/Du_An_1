@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Quản trị viên</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
         /* CSS chung cho tất cả các trang */
         body {
@@ -51,14 +53,12 @@
             background-color: #495057;
         }
         .main-content {
-            margin-left: 250px;
-            padding: 20px;
-            flex-grow: 1;
-        }
-        .main-content h2 {
-            color: #343a40;
-            font-size: 28px;
-            margin-bottom: 20px;
+          margin-left: 250px; /* Đảm bảo không bị che khuất bởi sidebar */
+    padding: 20px;
+    flex-grow: 1; /* Làm cho nội dung chính chiếm phần còn lại */
+    overflow-y: auto; /* Cho phép cuộn nếu nội dung vượt quá chiều cao */
+    min-height: 100vh; /* Đảm bảo phần nội dung chiếm ít nhất 100% chiều cao */
+    box-sizing: border-box; 
         }
         .footer {
             position: fixed;

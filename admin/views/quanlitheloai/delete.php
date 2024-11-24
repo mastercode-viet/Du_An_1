@@ -1,30 +1,31 @@
 <?php
-include 'db.php'; // Include database connection
+include 'db.php'; // Kết nối tới cơ sở dữ liệu
 
-// Check if the 'id' parameter is set in the URL
+// Kiểm tra nếu tham số 'id' được truyền qua URL và không rỗng
 if (isset($_GET['id']) && !empty(trim($_GET['id']))) {
-    $id = trim($_GET['id']);
+    $id = trim($_GET['id']); // Lấy giá trị của tham số 'id'
 
-    // Prepare a delete statement
+    // Chuẩn bị câu lệnh DELETE
     $sql = "DELETE FROM the_loai WHERE id_theloai = :id";
     if ($stmt = $conn->prepare($sql)) {
-        // Bind the parameter
+        // Gán giá trị tham số
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
-        // Attempt to execute the statement
+        // Thực thi câu lệnh
         if ($stmt->execute()) {
-            // Redirect to the main page after successful deletion
-            header("Location: index.php");
-            exit();
+            // Hiển thị thông báo xóa thành công và chuyển hướng về trang chính
+            echo "<script>window.location.href='".SITE_URL."/admin/index.php?view=quanlitheloai'</script>";
+
         } else {
+            // Hiển thị lỗi nếu không xóa được
             echo "Có lỗi xảy ra. Vui lòng thử lại.";
         }
 
-        // Close statement
+        // Đóng câu lệnh
         unset($stmt);
     }
 }
 
-// Close connection
+// Đóng kết nối cơ sở dữ liệu
 unset($conn);
 ?>

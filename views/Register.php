@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
-
 </head>
+<style>
+    /* Đảm bảo container chính chiếm toàn bộ chiều cao màn hình và căn giữa nội dung */
+</style>
+<body>
 <script>
     var arr_hinh = [
-        // "banner/1.webp",
         "/views//banner//2.webp",
         "/views//banner//3.webp",
         "/views//banner//4.webp",
         "/views//banner//5.webp",
-    ]
+    ];
     var index = 0;
 
     function prev() {
@@ -72,51 +73,52 @@
             </div> -->
         </div>
     </div>
+    <!--  "/views//banner//2.webp",
+        "/views//banner//3.webp",
+        "/views//banner//4.webp",
+        "/views//banner//5.webp", -->
     <div class="items">
         <img src="/views//banner//1.webp" width="100%" style="filter: blur(5px);" id="hinh">
         <i class="fa fa-chevron-circle-left" onclick="prev()"></i>
         <i class="fa fa-chevron-circle-right" onclick="next()"></i>
     </div>
-    <div class="test">
-    <div class="login">
+<div class="test">
+    <div class="register">
         <span class="icon-close">
             <ion-icon name="close-circle-outline">x</ion-icon>
         </span>
-        <form action="">
-            <h2>Đăng Nhập</h2>
-            <!-- Email -->
+        <form action="signup_handler.php" method="POST">
+            <h2>Đăng Ký</h2>
             <div class="taikhoan">
-                <p>Email:</p>
-                <input type="text" placeholder="Mời bạn nhập email" id="email" required>
+                <p>Họ và Tên :</p>
+                <input type="text" placeholder="Mời bạn nhập họ và tên" id="fullname" name="fullname" required>
             </div>
-
-            <!-- Password -->
+            <br>
             <div class="taikhoan">
-                <p>Password:</p>
-                <input type="password" placeholder="Mời bạn nhập mật khẩu" id="password" required>
+                <p>Email của bạn :</p>
+                <input type="email" placeholder="Mời bạn nhập email" id="email" name="email" required>
             </div>
-
-            <!-- Remember me and Forgot password -->
+            <br>
+            <div class="taikhoan">
+                <p>Mật khẩu của bạn:</p>
+                <input type="password" placeholder="Mời bạn nhập mật khẩu" id="password" name="password" required>
+            </div>
+            <br>
+            <div class="taikhoan">
+                <p>Nhập lại mật khẩu:</p>
+                <input type="password" placeholder="Xác nhận lại mật khẩu" id="confirm_password" name="confirm_password" required>
+            </div>
+            <br>
             <div class="nhotk">
-                <label><input type="checkbox">Nhớ tài khoản</label>
-                <a href="#">Quên mật khẩu</a>
+                <label><input type="checkbox" name="agree_terms" required>Tôi đồng ý với <a href="#">điều khoản và chính sách</a></label>
             </div>
-
-            <!-- Submit Button -->
-            <button type="submit" class="btn">Đăng Nhập</button>
-
-            <!-- Register Link -->
-            <div class="dangky">
-                <p>Bạn chưa có tài khoản? <a href="Register.php">Đăng ký</a></p>
+            <button type="submit" class="btn">Đăng Ký</button>
+            <div class="dangnhap">
+                <p>Bạn đã có tài khoản? <a href="login.php">Đăng nhập</a></p>
             </div>
         </form>
     </div>
 </div>
 
-        </div>
-    </div>
-    <!-- <footer>
-        <p>Cơ quan chủ quản: BỘ VĂN HÓA, THỂ THAO VÀ DU LỊCH Bản quyền thuộc Trung tâm Chiếu phim Quốc gia.
-            <br> Giấy phép số: 224/GP- TTĐT ngày 31/8/2010 - Chịu trách nhiệm: Lê Công Minh Thảo giám đốc
-            <br> Địa chỉ: 87 Láng Hạ, Quận Ba Đình, Tp. Hà Nội - Điện thoại: 0778340768 Copyright 2023. NCC All Rights Reservered. Dev by Anvui.vn</p>
-    </footer> -->
+</body>
+</html>
