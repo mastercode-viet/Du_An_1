@@ -3,15 +3,7 @@ class DanhMucController{
     // hiển thị danh sách
     // kết nối đến model
     public $modelDanhMuc;
-    public function __construct()
-    {
-        $this -> $modelDanhMuc = new DanhMuc();
-    }
-    public function index(){
-         $danhmucs = $this->$modelDanhMuc->getAll();
-         var_dump($danhmucs);
-         require_once './admin/views/danhmuc/listtheloai.php';
-    }
+
     // thêm
     public function create(){
 

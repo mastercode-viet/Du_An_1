@@ -1,101 +1,4 @@
-<?php
-// Kết nối cơ sở dữ liệu
-include 'db.php';
-
-// Kiểm tra xem ID phim có hợp lệ không
-if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-    $id = $_GET['id'];
-
-    // Lấy thông tin phim từ cơ sở dữ liệu
-    $sqlPhim = "SELECT * FROM phim WHERE id = :id";
-    $stmtPhim = $conn->prepare($sqlPhim);
-    $stmtPhim->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmtPhim->execute();
-    $phim = $stmtPhim->fetch(PDO::FETCH_ASSOC);
-
-    if (!$phim) {
-        $_SESSION['error'] = "Phim không tồn tại!";
-        header("Location: index.php?view=quanlyphim");
-        exit();
-    }
-
-    // Lấy tất cả thể loại từ cơ sở dữ liệu để người dùng có thể chọn
-    $sqlTheLoai = "SELECT * FROM the_loai";
-    $stmtTheLoai = $conn->prepare($sqlTheLoai);
-    $stmtTheLoai->execute();
-    $theloaiList = $stmtTheLoai->fetchAll(PDO::FETCH_ASSOC);
-
-    // Lấy các thể loại hiện tại của phim này
-    $sqlPhimTheLoai = "SELECT id_theloai FROM the_loai_phim WHERE id_phim = :id";
-    $stmtPhimTheLoai = $conn->prepare($sqlPhimTheLoai);
-    $stmtPhimTheLoai->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmtPhimTheLoai->execute();
-    $currentTheLoaiIds = $stmtPhimTheLoai->fetchAll(PDO::FETCH_COLUMN);
-
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // Lấy thông tin từ form
-        $tenPhim = $_POST['ten'];
-        $ngayRaMat = $_POST['ngayramat'];
-        $ngayChieu = $_POST['ngaychieu'];
-        $thoiLuong = $_POST['thoiluong'];
-        $noiDung = $_POST['noidung'];
-        $gioiThieu = $_POST['gioithieu'];
-        $daoDien = $_POST['daodien'];
-        $status = $_POST['status'];
-        $theLoaiIds = $_POST['theloai'];  // Mảng các ID thể loại đã chọn
-
-        try {
-            // Cập nhật thông tin phim trong bảng 'phim'
-            $sqlUpdatePhim = "UPDATE phim SET ten = :ten, ngayramat = :ngayramat, ngaychieu = :ngaychieu, 
-                             thoiluong = :thoiluong, noidung = :noidung, gioithieu = :gioithieu, 
-                             daodien = :daodien, status = :status WHERE id = :id";
-            $stmtUpdatePhim = $conn->prepare($sqlUpdatePhim);
-            $stmtUpdatePhim->execute([
-                ':ten' => $tenPhim,
-                ':ngayramat' => $ngayRaMat,
-                ':ngaychieu' => $ngayChieu,
-                ':thoiluong' => $thoiLuong,
-                ':noidung' => $noiDung,
-                ':gioithieu' => $gioiThieu,
-                ':daodien' => $daoDien,
-                ':status' => $status,
-                ':id' => $id
-            ]);
-
-            // Xóa các thể loại cũ của phim này trong bảng 'the_loai_phim'
-            $sqlDeleteOldTheLoai = "DELETE FROM the_loai_phim WHERE id_phim = :id_phim";
-            $stmtDeleteOldTheLoai = $conn->prepare($sqlDeleteOldTheLoai);
-            $stmtDeleteOldTheLoai->bindParam(':id_phim', $id, PDO::PARAM_INT);
-            $stmtDeleteOldTheLoai->execute();
-
-            // Chèn các thể loại mới vào bảng 'the_loai_phim'
-            $sqlInsertNewTheLoai = "INSERT INTO the_loai_phim (id_phim, id_theloai, status) 
-                                    VALUES (:id_phim, :id_theloai, :status)";
-            $stmtInsertNewTheLoai = $conn->prepare($sqlInsertNewTheLoai);
-            foreach ($theLoaiIds as $theLoaiId) {
-                $stmtInsertNewTheLoai->execute([
-                    ':id_phim' => $id,
-                    ':id_theloai' => $theLoaiId,
-                    ':status' => 1  // Cung cấp giá trị cho status (ví dụ là 1 cho 'đang chiếu')
-                ]);
-            }
-
-            // Chuyển hướng về trang danh sách phim sau khi cập nhật thành công
-            $_SESSION['success'] = 'Phim đã được cập nhật thành công!';
-            header("Location: /admin/index.php?view=quanlyphim");
-            exit();
-        } catch (PDOException $e) {
-            $_SESSION['error'] = 'Lỗi: ' . $e->getMessage();
-        }
-    }
-} else {
-    $_SESSION['error'] = "ID phim không hợp lệ.";
-    header("Location: /admin/index.php?view=quanlyphim");
-    exit();
-}
-?>
-
-<!-- HTML form cho phép chỉnh sửa phim -->
+<!-- View: edit_film.php -->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -122,7 +25,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         <?php endif; ?>
 
         <!-- Form chỉnh sửa thông tin phim -->
-        <form action="/admin/views/quanlyphim/edit.php?id=<?= htmlspecialchars($id) ?>" method="POST">
+        <form action="/admin/index.php?view=Phim&action=update&id=<?= htmlspecialchars($phim['id']) ?>" method="POST">
             <div class="form-group">
                 <label for="ten">Tên Phim</label>
                 <input type="text" class="form-control" id="ten" name="ten" value="<?= htmlspecialchars($phim['ten']) ?>" required>
@@ -157,11 +60,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                     <option value="1" <?= $phim['status'] == 1 ? 'selected' : '' ?>>Đang chiếu</option>
                     <option value="2" <?= $phim['status'] == 2 ? 'selected' : '' ?>>Ngừng chiếu</option>
                 </select>
-            </div>
-            <!--  -->
-            <div class="form-group">
-                <label for="image">Chọn ảnh mới</label>
-                <input type="file" id="image" name="image" class="form-control" accept="image/">
             </div>
             <!--  -->
             <div class="form-group">

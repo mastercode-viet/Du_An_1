@@ -15,7 +15,7 @@ try {
 
 // Kiểm tra nếu người dùng đã đăng nhập thì chuyển hướng về trang quản trị
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] == true) {
-    header("Location: index.php?view=dashboard");
+    header("Location: /admin/index.php"); // Chuyển hướng đến trang quản trị sau khi đăng nhập
     exit;
 }
 
@@ -36,10 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // So sánh trực tiếp mật khẩu
     if ($user && $password == $user['password']) {
         // Kiểm tra vai trò của người dùng (role)
-        if ($user['role'] == 1) {
+        if ($user['role'] == 1) { // Kiểm tra nếu là admin
             $_SESSION['admin_logged_in'] = true;
             $_SESSION['username'] = $user['username']; // Lưu tên đăng nhập vào session
-            header("Location: index.php?view=dashboard");
+            header("Location:/admin/index.php"); // Chuyển hướng đến trang quản trị
             exit;
         } else {
             $error = "Bạn không có quyền truy cập vào trang quản trị.";

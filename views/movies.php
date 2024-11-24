@@ -153,38 +153,35 @@
             <div class="top-header">
                 <ul>
                     <li>
-                        <a href="trangchu.html">Trang chủ</a>
+                        <a href="trangchu.php">Trang chủ</a>
                     </li>
                     <li>
-                        <a href="lichchieu.html">Lịch chiếu</a>
+                        <a href="lichchieu.php">Lịch chiếu</a>
                     </li>
                     <li>
-                        <a href="#">Tin tức</a>
+                        <a href="tintuc.php">Tin tức</a>
                     </li>
                     <li>
-                        <a href="#">Khuyến mại</a>
+                        <a href="khuyenmai.php">Khuyến mại</a>
                     </li>
                     <li>
-                        <a href="#">Giá vé</a>
+                        <a href="giave.php">Giá vé</a>
                     </li>
                     <li>
-                        <a href="#">Liên hoan phim</a>
+                        <a href="gioithieu.php">Giới thiệu</a>
                     </li>
                     <li>
-                        <a href="#">Giới thiệu</a>
+                        <a href="Register.php">Đăng ký</a>
                     </li>
                     <li>
-                        <a href="Sign up.html">Đăng ký</a>
-                    </li>
-                    <li>
-                        <a href="login.html">Đăng nhập</a>
+                        <a href="login.php">Đăng nhập</a>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
     <section>
-        <div class="movies"><img src="ảnh/ảnh 1.webp">
+        <div class="movies"><img src="/views//image//ảnh 1.webp">
             <div class="infos">
                 <h2>NGÀY XƯA CÓ 1 CHUYỆN TÌNH </h2>
                 <p>Tâm lý, tình cảm
