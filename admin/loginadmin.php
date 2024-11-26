@@ -39,10 +39,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($user['role'] == 1) { // Kiểm tra nếu là admin
             $_SESSION['admin_logged_in'] = true;
             $_SESSION['username'] = $user['username']; // Lưu tên đăng nhập vào session
-            header("Location:/admin/index.php"); // Chuyển hướng đến web quản trị 
+            header("Location:../admin/views/index.php"); // Chuyển hướng đến web quản trị
+            exit;
+        } elseif ($user['role'] == 0) { // Kiểm tra nếu vai trò là user thông thường
+            $_SESSION['user_logged_in'] = true;
+            $_SESSION['username'] = $user['username']; // Lưu tên đăng nhập vào session
+            header("Location: ../index.php"); // Chuyển hướng đến trang chủ
             exit;
         } else {
-            $error = "Bạn không có quyền truy cập vào trang quản trị.";
+            $error = "Bạn không có quyền truy cập vào trang này.";
         }
     } else {
         $error = "Tên đăng nhập hoặc mật khẩu không đúng!";

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
     <link rel="stylesheet" href="index.css">
 
 </head>
@@ -60,16 +60,11 @@
                         <a href="Register.php">Đăng ký</a>
                     </li>
                     <li>
-                        <a href="login.php">Đăng nhập</a>
+                        <a href="/views/login.php">Đăng nhập</a>
                     </li>
                 </ul>
             </div>
-            <!-- <div class="items">
-                <form action="">
-                    <button>đăng ký</button>
-                    <button>đăng nhập</button>
-                </form>
-            </div> -->
+          
         </div>
     </div>
     <div class="items">
@@ -82,30 +77,29 @@
         <span class="icon-close">
             <ion-icon name="close-circle-outline">x</ion-icon>
         </span>
-        <form action="">
+        <form action="index.php?act=login" method ="post">
             <h2>Đăng Nhập</h2>
             <!-- Email -->
             <div class="taikhoan">
-                <p>Email:</p>
-                <input type="text" placeholder="Mời bạn nhập email" id="email" required>
+                <p>Tên đăng nhập:</p>
+                <input type="text" placeholder="Mời bạn nhập tên đăng nhập" id="email"  name ="user"required>
             </div>
 
             <!-- Password -->
             <div class="taikhoan">
                 <p>Password:</p>
-                <input type="password" placeholder="Mời bạn nhập mật khẩu" id="password" required>
+                <input type="password" placeholder="Mời bạn nhập mật khẩu" id="password" name ="pass"required>
             </div>
 
-            <!-- Remember me and Forgot password -->
+           
             <div class="nhotk">
                 <label><input type="checkbox">Nhớ tài khoản</label>
                 <a href="#">Quên mật khẩu</a>
             </div>
 
-            <!-- Submit Button -->
-            <button type="submit" class="btn">Đăng Nhập</button>
+        
+            <input type="submit"name="login" class="btn" value="Đăng Nhập"></input>
 
-            <!-- Register Link -->
             <div class="dangky">
                 <p>Bạn chưa có tài khoản? <a href="Register.php">Đăng ký</a></p>
             </div>

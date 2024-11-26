@@ -1,22 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="index.css">
-
-</head>
-
-            <h2>Phim đang chiếu</h2>
+<h2>Phim đang chiếu</h2>
         </div>
         <!-- ảnh hàng dọc -->
         </div>
         <div id="products">
             <div class="content">
                 <div class="items">
-                    <img src="/views//image//ảnh 1.webp" alt="">
+                    <img src="/admin/" alt="">
                     <a href="#">
                         <h3>NGÀY XƯA CÓ MỘT CHUYỆN TÌNH - T16</h3>
                     </a>
@@ -24,7 +13,7 @@
                 </div>
 
                 <div class="items">
-                <img src="/views/image/ảnh 2.webp" alt=>
+                <img src="/views/image/anh2.webp" alt="Ảnh minh họa">
                     <a href="#">
                         <h3>VENOM: THE LAST DANCE -T13</h3>
                     </a>
@@ -188,5 +177,3 @@
                 </div>
             </div>
         </div>
-    </section>
- 

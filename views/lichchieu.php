@@ -10,21 +10,7 @@
 
 <body>
     <div id="main">
-        <div id="header">
-            <div class="top-header">
-                <ul>
-                    <li><a href="trangchu.php">Trang chủ</a></li>
-                    <li><a href="lichchieu.php">Lịch chiếu</a></li>
-                    <li><a href="tintuc.php">Tin tức</a></li>
-                    <li><a href="khuyenmai.php">Khuyến mại</a></li>
-                    <li><a href="giave.php">Giá vé</a></li>
-                    <li><a href="gioithieu.php">Giới thiệu</a></li>
-                    <li><a href="Register.php">Đăng ký</a></li>
-                    <li><a href="login.php">Đăng nhập</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+        
     <section>
         <header>
             <h1>Phim Đang Chiếu Phim</h1><button id="phim">18-11-2024</button><button id="phim">19-11-2024</button></header>
@@ -83,10 +69,4 @@
             </div>
         </main>
     </section>
-    <footer>
-        <p>Cơ quan chủ quản: BỘ VĂN HÓA, THỂ THAO VÀ DU LỊCH Bản quyền thuộc Trung tâm Chiếu phim Quốc gia. <br>Giấy phép số: 224/GP- TTĐT ngày 31/8/2010 - Chịu trách nhiệm: Lê Công Minh Thảo giám đốc <br>Địa chỉ: 87 Láng Hạ, Quận Ba Đình, Tp. Hà Nội - Điện
-            thoại: 0778340768 Copyright 2023. NCC All Rights Reservered. Dev by Anvui.vn</p>
-    </footer>
-</body>
-
-</html>
+ 
