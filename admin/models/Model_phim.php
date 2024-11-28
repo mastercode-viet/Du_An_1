@@ -27,6 +27,21 @@ class PhimModel {
         }
     }
 
+    public function read() {
+        // Câu truy vấn để lấy tất cả các phim
+        $query = "SELECT * FROM phim ";
+
+        // Chuẩn bị câu lệnh SQL
+        $stmt = $this->conn->prepare($query);
+
+        // Thực thi câu lệnh SQL
+        $stmt->execute();
+
+        // Trả về tất cả các phim dưới dạng mảng kết hợp
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+
     // Lấy tổng số phim để tính tổng số trang
     public function getTotalPhim() {
         $sql = "SELECT COUNT(*) FROM phim";
@@ -37,9 +52,10 @@ class PhimModel {
 
 
     // Thêm phim mới
-    public function addPhim($ten, $ngayramat, $ngaychieu, $thoiluong, $noidung, $gioithieu, $daodien, $status, $image) {
-        $sql = "INSERT INTO phim (ten, ngayramat, ngaychieu, thoiluong, noidung, gioithieu, daodien, status, image)
-                VALUES (:ten, :ngayramat, :ngaychieu, :thoiluong, :noidung, :gioithieu, :daodien, :status, :image)";
+    public function addPhim($ten, $ngayramat, $ngaychieu, $thoiluong, $noidung, $gioithieu, $daodien, $status, $image, $giatien) {
+        $sql = "INSERT INTO phim (ten, ngayramat, ngaychieu, thoiluong, noidung, gioithieu, daodien, status, image, giatien)
+                VALUES (:ten, :ngayramat, :ngaychieu, :thoiluong, :noidung, :gioithieu, :daodien, :status, :image, :giatien)";
+        
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([
             ':ten' => $ten,
@@ -50,10 +66,13 @@ class PhimModel {
             ':gioithieu' => $gioithieu,
             ':daodien' => $daodien,
             ':status' => $status,
-            ':image' => $image
+            ':image' => $image,
+            ':giatien' => $giatien // Thêm giá trị giatien
         ]);
+    
         return $this->conn->lastInsertId(); // Trả về ID của phim vừa thêm
     }
+    
 
     public function getAllTheLoai() {
         $sql = "SELECT * FROM the_loai";
@@ -97,10 +116,10 @@ class PhimModel {
     }
 
     // Cập nhật thông tin phim
-    public function updatePhim($id, $ten, $ngayramat, $ngaychieu, $thoiluong, $noidung, $gioithieu, $daodien, $status) {
-        $sql = "UPDATE phim SET ten = ?, ngayramat = ?, ngaychieu = ?, thoiluong = ?, noidung = ?, gioithieu = ?, daodien = ?, status = ? WHERE id = ?";
+    public function updatePhim($id, $ten, $ngayramat, $ngaychieu, $thoiluong, $noidung, $gioithieu, $daodien, $status, $giatien) {
+        $sql = "UPDATE phim SET ten = ?, ngayramat = ?, ngaychieu = ?, thoiluong = ?, noidung = ?, gioithieu = ?, daodien = ?, status = ?, giatien = ? WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$ten, $ngayramat, $ngaychieu, $thoiluong, $noidung, $gioithieu, $daodien, $status, $id]);
+        $stmt->execute([$ten, $ngayramat, $ngaychieu, $thoiluong, $noidung, $gioithieu, $daodien, $status, $giatien, $id]);
     }
 
     // Cập nhật thể loại cho phim

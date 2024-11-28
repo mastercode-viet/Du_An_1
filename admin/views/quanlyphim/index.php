@@ -32,6 +32,7 @@
                 <th>Thời lượng</th>
                 <th>Đạo diễn</th>
                 <th>Thể loại</th>
+                <th>Giá Tiền</th>
                 <th>Status</th>
                 <th>Hành động</th>
             </tr>
@@ -53,6 +54,7 @@
                     <td><?= htmlspecialchars($p['thoiluong']) ?></td>
                     <td><?= htmlspecialchars($p['daodien']) ?></td>
                     <td><?= htmlspecialchars($p['theloai']) ?></td>
+                    <td><?= htmlspecialchars($p['giatien']) ?></td>
                     <td><?= htmlspecialchars($p['status']) ?></td>
                     <td>
                         <a href="?view=Phim&action=edit&id=<?= urlencode($p['id']) ?>" class="btn btn-warning btn-sm">Chỉnh sửa</a>

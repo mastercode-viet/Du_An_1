@@ -11,7 +11,7 @@ class PhongchieuModel {
      // Lấy phòng chiếu với tên rạp (JOIN với bảng rap)
      public function getPhongChieuWithRap($limit, $offset) {
         // Câu lệnh SQL để lấy thông tin phòng chiếu và tên rạp
-    $sql = "SELECT pc.id_phongchieu, pc.id_rap, pc.danhgia, pc.status, r.ten AS ten_rap
+    $sql = "SELECT pc.id_phongchieu, pc.id_rap,pc.ten, pc.danhgia, pc.status, r.ten AS ten_rap
     FROM phongchieu pc
     LEFT JOIN rap r ON pc.id_rap = r.id
     LIMIT :limit OFFSET :offset";
@@ -37,13 +37,14 @@ return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Thêm phòng chiếu
-    public function addPhongChieu($id_rap, $danhgia, $status) {
+    public function addPhongChieu($id_rap,$ten, $danhgia, $status) {
         try {
-            $sql = "INSERT INTO phongchieu (id_rap, danhgia, status) 
-                    VALUES (:id_rap, :danhgia, :status)";
+            $sql = "INSERT INTO phongchieu (id_rap,ten, danhgia, status) 
+                    VALUES (:id_rap,:ten, :danhgia, :status)";
             
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id_rap', $id_rap, PDO::PARAM_INT);
+            $stmt->bindParam(':ten', $ten, PDO::PARAM_INT);
             $stmt->bindParam(':danhgia', $danhgia, PDO::PARAM_STR);
             $stmt->bindParam(':status', $status, PDO::PARAM_INT);
     
@@ -70,15 +71,23 @@ return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
     // Cập nhật thông tin phòng chiếu
-    public function updatePhongChieu($id, $id_rap, $danhgia, $status) {
-        $sql = "UPDATE phongchieu SET id_rap = :id_rap, danhgia = :danhgia, status = :status WHERE id_phongchieu = :id";
+    public function updatePhongChieu($id, $id_rap,$ten, $danhgia, $status) {
+        $sql = "UPDATE phongchieu SET id_rap = :id_rap,ten = :ten, danhgia = :danhgia, status = :status WHERE id_phongchieu = :id";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':id_rap', $id_rap, PDO::PARAM_INT);
+        $stmt->bindParam(':ten', $ten, PDO::PARAM_STR);
         $stmt->bindParam(':danhgia', $danhgia, PDO::PARAM_STR);
         $stmt->bindParam(':status', $status, PDO::PARAM_INT);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         
         return $stmt->execute();
+    }
+    public function read() {
+        $query = "SELECT id_phongchieu, ten FROM phongchieu";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);  // Trả về tất cả phòng chiếu
     }
     public function isPhongChieuUsed($id) {
         // Kiểm tra xem phòng chiếu này có buổi chiếu nào sử dụng không

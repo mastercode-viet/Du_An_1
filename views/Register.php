@@ -87,7 +87,7 @@
         <span class="icon-close">
             <ion-icon name="close-circle-outline">x</ion-icon>
         </span>
-        <form action="signup_handler.php" method="POST">
+        <form action="index.php?act=login" method="POST">
             <h2>Đăng Ký</h2>
             <div class="taikhoan">
                 <p>Họ và Tên :</p>
