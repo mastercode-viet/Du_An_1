@@ -124,7 +124,7 @@
                     </ul>
                 </div>
                 <div class="about-image">
-                    <img src="/views//gioithieu//lecongminhthao.jpg"  alt="Rạp chiếu phim" />
+                    <img src="views/image/sodo.jpg"  alt="Rạp chiếu phim" />
                 </div>
             </div>
         </div>

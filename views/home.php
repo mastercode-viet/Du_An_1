@@ -1,11 +1,86 @@
-<h2>Phim đang chiếu</h2>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+
+</head>
+<script>
+    var arr_hinh = [
+        // "banner/1.webp",
+        "/views//banner//2.webp",
+        "/views//banner//3.webp",
+        "/views//banner//4.webp",
+        "/views//banner//5.webp",
+    ];
+    var index = 0;
+
+    function prev() {
+        index--;
+        if (index < -0) index = arr_hinh.length - 1;
+        document.getElementById("hinh").src = arr_hinh[index];
+    }
+
+    function next() {
+        index++;
+        if (index == arr_hinh.length) index = 0;
+
+        document.getElementById("hinh").src = arr_hinh[index];
+    }
+    setInterval("next()", 2000);
+</script>
+
+<body>
+    <div id="main">
+        <div id="header">
+            <div class="top-header">
+                <ul>
+                    <li>
+                        <a href="trangchu.php">Trang chủ</a>
+                    </li>
+                    <li>
+                        <a href="lichchieu.php">Lịch chiếu</a>
+                    </li>
+                    <li>
+                        <a href="tintuc.php">Tin tức</a>
+                    </li>
+                    <li>
+                        <a href="khuyenmai.php">Khuyến mại</a>
+                    </li>
+                    <li>
+                        <a href="giave.php">Giá vé</a>
+                    </li>
+                    <li>
+                        <a href="gioithieu.php">Giới thiệu</a>
+                    </li>
+                    <li>
+                        <a href="Signup.php">Đăng ký</a>
+                    </li>
+                    <li>
+                        <a href="login.php">Đăng nhập</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <section>
+        <!-- slideshow -->
+        <div class="items">
+            <img src="/views//banner//1.webp" width="100%" id="hinh">
+            <i class="fa fa-chevron-circle-left" onclick="prev()"></i>
+            <i class="fa fa-chevron-circle-right" onclick="next()"></i>
+            <h2>Phim đang chiếu</h2>
         </div>
         <!-- ảnh hàng dọc -->
         </div>
         <div id="products">
             <div class="content">
                 <div class="items">
-                    <img src="/admin/" alt="">
+                    <img src="/views//image//ảnh 1.webp" alt="">
                     <a href="#">
                         <h3>NGÀY XƯA CÓ MỘT CHUYỆN TÌNH - T16</h3>
                     </a>
@@ -13,7 +88,7 @@
                 </div>
 
                 <div class="items">
-                <img src="/views/image/anh2.webp" alt="Ảnh minh họa">
+                    <img src="/views//image//ảnh 2.webp" alt="">
                     <a href="#">
                         <h3>VENOM: THE LAST DANCE -T13</h3>
                     </a>
@@ -177,3 +252,12 @@
                 </div>
             </div>
         </div>
+    </section>
+    <footer>
+        <p>Cơ quan chủ quản: BỘ VĂN HÓA, THỂ THAO VÀ DU LỊCH Bản quyền thuộc Trung tâm Chiếu phim Quốc gia.
+            <br> Giấy phép số: 224/GP- TTĐT ngày 31/8/2010 - Chịu trách nhiệm: Lê Công Minh Thảo giám đốc
+            <br> Địa chỉ: 87 Láng Hạ, Quận Ba Đình, Tp. Hà Nội - Điện thoại: 0778340768 Copyright 2023. NCC All Rights Reservered. Dev by Anvui.vn</p>
+    </footer>
+</body>
+
+</html>

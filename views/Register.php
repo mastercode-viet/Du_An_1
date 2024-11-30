@@ -87,21 +87,29 @@
         <span class="icon-close">
             <ion-icon name="close-circle-outline">x</ion-icon>
         </span>
-        <form action="signup_handler.php" method="POST">
+        <form action="index.php?act=dangky" method="POST">
             <h2>Đăng Ký</h2>
             <div class="taikhoan">
-                <p>Họ và Tên :</p>
-                <input type="text" placeholder="Mời bạn nhập họ và tên" id="fullname" name="fullname" required>
+            <div class="taikhoan">
+                <p>Họ:</p>
+                <input type="text" placeholder="Mời bạn nhập họ" id="fullname" name="ho" required>
             </div>
-            <br>
+            <div class="taikhoan">
+                <p>Tên  :</p>
+                <input type="text" placeholder="Mời bạn nhập tên " id="fullname" name="ten" required>
+            </div>
+                <p>Tên đăng nhập :</p>
+                <input type="text" placeholder="Mời bạn nhập tên đăng nhập" id="fullname" name="user" required>
+            </div>
+            <br>    
             <div class="taikhoan">
                 <p>Email của bạn :</p>
-                <input type="email" placeholder="Mời bạn nhập email" id="email" name="email" required>
+                <input type="email" placeholder="Mời bạn nhập email" id="email" name="gmail" required>
             </div>
             <br>
             <div class="taikhoan">
                 <p>Mật khẩu của bạn:</p>
-                <input type="password" placeholder="Mời bạn nhập mật khẩu" id="password" name="password" required>
+                <input type="password" placeholder="Mời bạn nhập mật khẩu" id="password" name="pass" required>
             </div>
             <br>
             <div class="taikhoan">
@@ -111,12 +119,23 @@
             <br>
             <div class="nhotk">
                 <label><input type="checkbox" name="agree_terms" required>Tôi đồng ý với <a href="#">điều khoản và chính sách</a></label>
+                <br> <br>
+                  <label><input type="reset"  required value="Nhập lại "> </label>
             </div>
-            <button type="submit" class="btn">Đăng Ký</button>
+            <input  type="submit" class="btn" name="dangky" value="Đăng Ký"></input>
             <div class="dangnhap">
-                <p>Bạn đã có tài khoản? <a href="login.php">Đăng nhập</a></p>
+                <p>Bạn đã có tài khoản? <a href="views/login.php">Đăng nhập</a></p>
             </div>
         </form>
+        <h2 class="thongbao">
+                    <?php
+               
+               if (isset($thongbao)) {
+                echo "<p>$thongbao</p>";
+            }
+            
+                ?>
+                </h2>
     </div>
 </div>
 

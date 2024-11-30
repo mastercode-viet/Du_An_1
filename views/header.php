@@ -41,7 +41,8 @@ if (session_status() == PHP_SESSION_NONE) {
         <div id="header">
             <div class="top-header">
                 <ul>
-                    <li><a href="trangchu.php">Trang chủ</a></li>
+                    <li><a href="index.php?act=trangchu"><img src="views/image/loo.png" alt="" width="65px"></a></li>
+                    <li><a href="index.php?act=trangchu">Trang chủ</a></li>
                     <li><a href="index.php?act=lichchieu">Lịch chiếu</a></li>
                     <li><a href="index.php?act=tintuc">Tin tức</a></li>
                     <li><a href="index.php?act=khuyenmai">Khuyến mại</a></li>
@@ -52,15 +53,16 @@ if (session_status() == PHP_SESSION_NONE) {
                     // Kiểm tra xem người dùng đã đăng nhập hay chưa
                     if (isset($_SESSION['username'])) {
                         // Nếu người dùng đã đăng nhập, hiển thị nút "Đăng xuất"
-                        echo '<li>  <a href="index.php?act=userinfor">' . htmlspecialchars($_SESSION['username']) . '!</a></li>';
+                        echo '<li>  <a href="index.php?act=userinfor">' . 'Xin chào_' . htmlspecialchars($_SESSION['username']) . '!</a></li>';
                         echo '<li>  <a href="index.php?act=logout">Đăng Xuất</a></li>';
-                       
+
                     } else {
-                       ?>
+                        ?>
                         <li><a href="index.php?act=dangky">Đăng ký </a></li>
                         <li><a href="index.php?act=login">Đăng nhập </a></li>
-                    
-                    <?php } ?>
+
+                        <?php
+                    } ?>
                 </ul>
             </div>
         </div>
