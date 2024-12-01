@@ -23,6 +23,7 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] == true)
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
+    
 
     // Truy vấn kiểm tra tên đăng nhập trong bảng 'khach_hang'
     $sql = "SELECT * FROM khach_hang WHERE username = :username";
