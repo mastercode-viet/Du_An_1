@@ -24,7 +24,6 @@ match ($act) {
     // Trang chủ
      => (new HomeController())->index(),
 };
->>>>>>> 8847ae7f033cf8a56dc739c08fb4c5ba33dbc7f3
 
 // Kiểm tra trạng thái đăng nhập
 if (!isset($_SESSION['user'])) {
@@ -33,7 +32,6 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
-<<<<<<< HEAD
 // Nếu đã đăng nhập, tiếp tục xử lý các hành động
 include "./views/trangchu.php";
 switch ($_GET['act']) {
@@ -51,8 +49,4 @@ switch ($_GET['act']) {
         include "./views/trangchu.php";
 }
 ?>
-=======
-
-    
 };
->>>>>>> 8847ae7f033cf8a56dc739c08fb4c5ba33dbc7f3 -->
