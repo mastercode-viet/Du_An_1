@@ -33,6 +33,11 @@
             </div>
 
             <div class="form-group">
+                <label for="ten">Tên:</label>
+                <input type="text" name="ten" id="ten" class="form-control" value="<?= htmlspecialchars($phongchieu['ten']) ?>" required>
+            </div>
+
+            <div class="form-group">
                 <label for="danhgia">Đánh giá:</label>
                 <input type="text" name="danhgia" id="danhgia" class="form-control" value="<?= htmlspecialchars($phongchieu['danhgia']) ?>" required>
             </div>

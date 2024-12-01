@@ -1,72 +1,43 @@
 <?php
-include 'db.php';
+// Kiểm tra nếu có thông báo lỗi từ session
+if (isset($_SESSION['error'])) {
+    echo "<div class='alert alert-danger'>" . $_SESSION['error'] . "</div>";
+    unset($_SESSION['error']); // Sau khi hiển thị thì xóa thông báo lỗi
+}
 
-// Truy vấn lấy danh sách thể loại
-$sql = "SELECT * FROM ghe";  // Câu lệnh SQL để lấy dữ liệu
-$stmt = $conn->prepare($sql);    // Chuẩn bị câu lệnh SQL
-
-try {
-    // Thực thi câu lệnh
-    $stmt->execute(); 
-
-    // Lấy dữ liệu từ cơ sở dữ liệu
-    $ghe = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-    if (empty($ghe)) {
-        echo "Không có dữ liệu thể loại nào.";
-    }
-} catch (PDOException $e) {
-    // Xử lý lỗi nếu có
-    echo "Lỗi truy vấn: " . $e->getMessage();
+if (isset($_SESSION['success'])) {
+    echo "<div class='alert alert-success'>" . $_SESSION['success'] . "</div>";
+    unset($_SESSION['success']); // Sau khi hiển thị thì xóa thông báo thành công
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý ghế</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <style>
-        h1 {
-            text-align: center;
-            color: red;
-        }
-    </style>
-</head>
-<body>
+<div class="container">
     <h1>Danh sách ghế</h1>
-    <a href="?view=quanlirap&action=create" class="btn btn-primary">Thêm ghế</a>
-    <table class="table table-bordered">
+    <a href="?view=Ghe&action=create" class="btn btn-primary">Thêm ghế mới</a>
+    <table class="table table-striped mt-3">
+    <thead>
         <tr>
             <th>ID Ghế</th>
-            <th>ID Phòng</th>
-            <th>Số ghế</th>
-            <th>Loại ghế</th>
-            <th>Tình trạng</th>
-            <th>Sửa và Xóa</th>
+            <th>Tên Phòng Chiếu</th>
+            <th>Tên Dãy Ghế</th>
+            <th>Tên Ghế</th>
+            <th>Trạng Thái</th>
+            <th>Hành động</th>
         </tr>
-        <?php if (!empty($ghe) && is_array($ghe)): ?>
-            <?php foreach ($ghe as $ghes): ?>
+    </thead>
+    <tbody>
+        <?php foreach ($result as $row) { ?>
             <tr>
-                <td><?= htmlspecialchars($ghes['id_ghe']) ?></td>
-                <td><?= htmlspecialchars($ghes['id_phong']) ?></td>
-                <td><?= htmlspecialchars($ghes['soghe']) ?></td>
-                <td><?= htmlspecialchars($ghes['loaighe']) ?></td>
-                <td><?= htmlspecialchars($ghes['tinhtrang']) ?></td>
-
-
+                <td><?php echo $row['id_ghe']; ?></td>
+                <td><?php echo $row['ten_phongchieu']; ?></td> <!-- Hiển thị tên phòng chiếu -->
+                <td><?php echo $row['ten_dayghe']; ?></td> <!-- Hiển thị tên dãy ghế -->
+                <td><?php echo $row['ten']; ?></td>
+                <td><?php echo $row['status'] == 1 ? 'Hoạt động' : 'Không hoạt động'; ?></td>
                 <td>
-                    <a href="edit.php?id=<?= htmlspecialchars($ghes['id_ghe']) ?>">Chỉnh sửa</a>
-                    <a href="delete.php?id=<?= htmlspecialchars($ghes['id_ghe']) ?>" onclick="return confirm('Bạn có chắc muốn xóa?');">Xóa</a>
+                    <a href="?view=Ghe&action=edit&id_ghe=<?php echo $row['id_ghe']; ?>" class="btn btn-warning">Sửa</a>
+                    <a href="?view=Ghe&action=delete&id_ghe=<?php echo $row['id_ghe']; ?>" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa?');">Xóa</a>
                 </td>
             </tr>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <tr>
-                <td colspan="4">Không có dữ liệu thể loại nào để hiển thị.</td>
-            </tr>
-        <?php endif; ?>
+        <?php } ?>
+    </tbody>
     </table>
-</body>
-</html>
+</div>

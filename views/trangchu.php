@@ -1,3 +1,18 @@
+<?php
+// Bắt đầu session
+session_start();
+
+// Kiểm tra nếu người dùng đã đăng nhập
+if (!isset($_SESSION['user'])) {
+    // Nếu chưa đăng nhập, chuyển hướng đến trang login
+    header('Location: login.php');
+    exit();
+}
+
+// Nếu đã đăng nhập, tiếp tục xử lý trang
+$user = $_SESSION['user'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +20,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="/views//css//index.css">
 
 </head>
 <script>
@@ -57,10 +72,7 @@
                         <a href="gioithieu.php">Giới thiệu</a>
                     </li>
                     <li>
-                        <a href="Signup.php">Đăng ký</a>
-                    </li>
-                    <li>
-                        <a href="login.php">Đăng nhập</a>
+                    <a href="logout.php">Đăng xuất</a>
                     </li>
                 </ul>
             </div>

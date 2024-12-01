@@ -7,6 +7,10 @@
             <?php endforeach; ?>
         </select>
     </div>
+    <div class="form-group">
+        <label for="ten">Tên:</label>
+        <input type="text" name="ten" id="ten" class="form-control" required>
+    </div>
 
     <div class="form-group">
         <label for="danhgia">Đánh giá:</label>

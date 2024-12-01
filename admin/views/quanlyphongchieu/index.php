@@ -27,6 +27,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Tên Rạp</th>
+                    <th>Tên Phòng</th>
                     <th>Đánh giá</th>
                     <th>Status</th>
                     <th>Hành động</th>
@@ -36,7 +37,8 @@
                 <?php foreach ($phongchieus as $item): ?>
                     <tr>
                         <td><?= htmlspecialchars($item['id_phongchieu']) ?></td>
-                        <td><?= htmlspecialchars($item['ten_rap']) ?></td> <!-- Hiển thị tên rạp -->
+                        <td><?= htmlspecialchars($item['ten_rap']) ?></td> 
+                        <td><?= htmlspecialchars($item['ten']) ?></td> 
                         <td><?= htmlspecialchars($item['danhgia']) ?></td>
                         <td>
                             <?= $item['status'] == 1 ? 'Hoạt động' : 'Dừng hoạt động' ?>

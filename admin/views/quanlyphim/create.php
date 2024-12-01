@@ -62,6 +62,11 @@
                     <?php endforeach; ?>
                 </select>
             </div>
+            
+            <div class="form-group">
+        <label for="giatien">Giá Tiền</label>
+        <input type="text" id="giatien" name="giatien" class="form-control" required>
+    </div>
 
             <div class="form-group">
                 <label for="image">Ảnh</label>

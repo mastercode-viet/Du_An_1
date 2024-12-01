@@ -31,7 +31,7 @@ class PhimController {
     public function create() {
         // Lấy tất cả thể loại
         $theloaiList = $this->phimModel->getAllTheLoai();
-
+    
         // Kiểm tra nếu form được submit
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Lấy thông tin từ form
@@ -44,19 +44,21 @@ class PhimController {
             $daoDien = $_POST['daodien'];
             $status = $_POST['status'];
             $theLoaiIds = $_POST['theloai']; // Mảng các ID thể loại đã chọn
-
+            $giatien = $_POST['giatien']; // Lấy giá tiền từ form
+    
             $imagePath = null;
-
+    
+            // Xử lý upload hình ảnh
             if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
                 // Thư mục lưu trữ ảnh
                 $uploadDir = '/admin/images/';
                 $tmpName = $_FILES['image']['tmp_name'];
                 $fileName = basename($_FILES['image']['name']);
                 $targetFilePath = $uploadDir . $fileName;
-
+    
                 $rootPath = $_SERVER['DOCUMENT_ROOT'];
                 $target_path = $rootPath . $uploadDir . basename($_FILES["image"]["name"]);
-
+    
                 if (move_uploaded_file($tmpName, $target_path)) {
                     $imagePath = $targetFilePath; // Đường dẫn ảnh
                 } else {
@@ -64,22 +66,22 @@ class PhimController {
                     exit;
                 }
             }
-
+    
             // Thêm phim vào cơ sở dữ liệu
-            $phimId = $this->phimModel->addPhim($tenPhim, $ngayRaMat, $ngayChieu, $thoiLuong, $noiDung, $gioiThieu, $daoDien, $status, $imagePath);
+            $phimId = $this->phimModel->addPhim($tenPhim, $ngayRaMat, $ngayChieu, $thoiLuong, $noiDung, $gioiThieu, $daoDien, $status, $imagePath, $giatien);
             
             // Thêm thể loại cho phim
             $this->phimModel->addTheLoaiPhim($phimId, $theLoaiIds);
-
+    
             // Chuyển hướng về trang danh sách phim với thông báo thành công
             header("Location: /admin/index.php?view=Phim&status=success");
             exit;
         }
-
+    
         // Bao gồm view để hiển thị form thêm phim
-         // Bao gồm view tương ứng
-         include($_SERVER['DOCUMENT_ROOT'] . '/admin/views/quanlyphim/create.php');
+        include($_SERVER['DOCUMENT_ROOT'] . '/admin/views/quanlyphim/create.php');
     }
+    
     public function delete() {
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
@@ -98,23 +100,23 @@ class PhimController {
     }
     public function edit() {
         if (isset($_GET['id'])) {
-            $id = $_GET['id'];  //
-        $phim = $this->phimModel->getPhimById($id);
-        if (!$phim) {
-            $_SESSION['error'] = "Phim không tồn tại!";
-            header("Location: index.php?view=quanlyphim");
-            exit();
+            $id = $_GET['id'];  
+            $phim = $this->phimModel->getPhimById($id);
+            if (!$phim) {
+                $_SESSION['error'] = "Phim không tồn tại!";
+                header("Location: index.php?view=quanlyphim");
+                exit();
+            }
+    
+            // Lấy tất cả thể loại và thể loại của phim
+            $theloaiList = $this->phimModel->getAllTheLoai();
+            $currentTheLoaiIds = $this->phimModel->getTheLoaiByPhimId($id);
+    
+            // Truyền dữ liệu vào view, bao gồm giatien
+            include($_SERVER['DOCUMENT_ROOT'] . '/admin/views/quanlyphim/edit.php');
         }
-
-        // Lấy tất cả thể loại và thể loại của phim
-        $theloaiList = $this->phimModel->getAllTheLoai();
-        $currentTheLoaiIds = $this->phimModel->getTheLoaiByPhimId($id);
-
-        // Truyền dữ liệu vào view
-      
-        include($_SERVER['DOCUMENT_ROOT'] . '/admin/views/quanlyphim/edit.php');
     }
-}
+
 
     
 
@@ -131,28 +133,27 @@ class PhimController {
             $daodien = $_POST['daodien'];
             $status = $_POST['status'];
             $theloaiIds = $_POST['theloai'];
-
+            $giatien = $_POST['giatien']; // Lấy giá trị giatien từ form
+    
             // Cập nhật thông tin phim
-            $this->phimModel->updatePhim($id, $ten, $ngayramat, $ngaychieu, $thoiluong, $noidung, $gioithieu, $daodien, $status);
-
+            $this->phimModel->updatePhim($id, $ten, $ngayramat, $ngaychieu, $thoiluong, $noidung, $gioithieu, $daodien, $status, $giatien);
+    
             // Cập nhật thể loại cho phim
             $this->phimModel->updateTheLoaiForPhim($id, $theloaiIds);
-
+    
             $_SESSION['success'] = 'Cập nhật phim thành công!';
             header('Location: ' . SITE_URL . '/admin/index.php?view=Phim');
             exit;
         }
-
+    
         // Lấy thông tin phim và thể loại
         $id = $_GET['id'];
         $phim = $this->phimModel->getPhimById($id);
         $theloaiList = $this->phimModel->getAllTheLoai();
         $currentTheLoaiIds = $this->phimModel->getTheLoaiByPhim($id);
-
+    
         // Gửi dữ liệu sang View để hiển thị
-     
         include($_SERVER['DOCUMENT_ROOT'] . '/admin/views/quanlyphim/edit.php');
     }
-
 }
 ?>

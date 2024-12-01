@@ -39,11 +39,12 @@ class PhongchieuController {
         // Kiểm tra xem có phải là request POST không
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $id_rap = $_POST['id_rap'];
+            $ten= $_POST['ten'];
             $danhgia = $_POST['danhgia'];
             $status = $_POST['status'];
     
             // Gọi model để thêm phòng chiếu
-            if ($this->phongchieuModel->addPhongChieu($id_rap, $danhgia, $status)) {
+            if ($this->phongchieuModel->addPhongChieu($id_rap, $ten,$danhgia, $status)) {
                 $_SESSION['success'] = 'Thêm phòng chiếu thành công';
                 header('Location: ?view=Phongchieu');
                 exit;
@@ -88,11 +89,12 @@ class PhongchieuController {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Lấy dữ liệu từ form
         $id_rap = $_POST['id_rap'];
+        $ten= $_POST['ten'];
         $danhgia = $_POST['danhgia'];
         $status = $_POST['status'];
 
         // Cập nhật phòng chiếu trong database
-        if ($this->phongchieuModel->updatePhongChieu($id, $id_rap, $danhgia, $status)) {
+        if ($this->phongchieuModel->updatePhongChieu($id, $id_rap,$ten, $danhgia, $status)) {
             $_SESSION['success'] = 'Cập nhật phòng chiếu thành công';
             header('Location: ?view=Phongchieu'); // Quay lại danh sách phòng chiếu
             exit;
